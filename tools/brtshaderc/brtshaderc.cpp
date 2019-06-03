@@ -50,26 +50,26 @@ void printError(FILE* file, const char* format, ...)
 #include "../../bgfx/tools/shaderc/shaderc_glsl.cpp"
 //#define static_allocate static_allocate_shaderc
 //#define static_deallocate static_deallocate_shaderc
-//#include "../../bgfx/tools/shaderc/shaderc_spirv.cpp"
-//#include "../../bgfx/tools/shaderc/shaderc_pssl.cpp"
+#include "../../bgfx/tools/shaderc/shaderc_spirv.cpp"
+#include "../../bgfx/tools/shaderc/shaderc_pssl.cpp"
 
-namespace bgfx 
-{
-    bool compilePSSLShader(const Options&, uint32_t, const std::string&, bx::WriterI*)
-    {
-        return false;
-    }
+// namespace bgfx 
+// {
+//     bool compilePSSLShader(const Options&, uint32_t, const std::string&, bx::WriterI*)
+//     {
+//         return false;
+//     }
 
-    bool compileSPIRVShader(const Options&, uint32_t, const std::string&, bx::WriterI*)
-    {
-        return false;
-    }
+//     bool compileSPIRVShader(const Options&, uint32_t, const std::string&, bx::WriterI*)
+//     {
+//         return false;
+//     }
 
-    const char* getPsslPreamble()
-    {
-        return "";
-    }
-}
+//     const char* getPsslPreamble()
+//     {
+//         return "";
+//     }
+// }
 
 
 
@@ -238,7 +238,8 @@ namespace shaderc
         // set varyingdef
         std::string defaultVarying = dir + "varying.def.sc";
         const char* varyingdef = varyingPath ? varyingPath : defaultVarying.c_str();
-        bgfx::File attribdef(varyingdef);
+        bgfx::File attribdef;
+        attribdef.load(varyingdef);
         const char* parse = attribdef.getData();
         if (NULL != parse
         &&  *parse != '\0')
@@ -480,7 +481,8 @@ namespace shaderc
         {
             std::string defaultVarying = dir + "varying.def.sc";
             const char* varyingdef = cmdLine.findOption("varyingdef", defaultVarying.c_str() );
-            File attribdef(varyingdef);
+            File attribdef;
+            attribdef.load(varyingdef);
             const char* parse = attribdef.getData();
             if (NULL != parse
             &&  *parse != '\0')
