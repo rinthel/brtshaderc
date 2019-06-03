@@ -21,6 +21,7 @@ namespace shaderc
             ShaderType type
           , const char* filePath
           , const char* defines = nullptr
+          , const char* includeDir = nullptr
           , const char* varyingPath = nullptr
           , const char* profile = nullptr
           );

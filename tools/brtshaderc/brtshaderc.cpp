@@ -125,7 +125,7 @@ namespace shaderc
 
 
 
-    const bgfx::Memory* compileShader(ShaderType type, const char* filePath, const char* defines, const char* varyingPath, const char* profile)
+    const bgfx::Memory* compileShader(ShaderType type, const char* filePath, const char* defines, const char* includeDir, const char* varyingPath, const char* profile)
     {
         bgfx::Options options;
 
@@ -221,6 +221,9 @@ namespace shaderc
 
             dir.assign(path.getPtr(), path.getTerm() );
             options.includeDirs.push_back(dir);
+        }
+        if (includeDir) {
+            options.includeDirs.push_back(includeDir);
         }
 
         // set defines
