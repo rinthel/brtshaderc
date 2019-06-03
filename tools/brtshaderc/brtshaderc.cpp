@@ -136,7 +136,8 @@ namespace shaderc
 
 
 
-    const std::vector<uint8_t>* compileShader(ShaderType type, const char* filePath, const char* defines, const char* includeDir, const char* varyingPath, const char* profile)
+    const std::vector<uint8_t>* compileShader(ShaderType type, const char* filePath, const char* defines,
+        const char* includeDir, const char* varyingPath, const char* platform, const char* profile)
     {
         bgfx::Options options;
 
@@ -157,6 +158,9 @@ namespace shaderc
 #elif BX_PLATFORM_OSX
         options.platform = "osx";
 #endif
+        if (platform) {
+            options.platform = platform;
+        }
 
         // set profile
         if(profile)

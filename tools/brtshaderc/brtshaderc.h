@@ -23,6 +23,7 @@ namespace shaderc
           , const char* defines = nullptr
           , const char* includeDir = nullptr
           , const char* varyingPath = nullptr
+          , const char* platform = nullptr
           , const char* profile = nullptr
           );
 
