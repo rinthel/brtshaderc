@@ -17,7 +17,7 @@ namespace shaderc
      * @param profile : shader profile ("ps_4_0", "vs_4_0", ...). If null, library try to set default profile for current context.
      * @return a memory block of compiled shader ready to use with bgfx::createShader, or null if failed.
      */
-    const bgfx::Memory* compileShader(
+    const std::vector<uint8_t>* compileShader(
             ShaderType type
           , const char* filePath
           , const char* defines = nullptr

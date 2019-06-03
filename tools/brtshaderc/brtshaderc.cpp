@@ -110,6 +110,17 @@ namespace shaderc
             return nullptr;
         }
 
+        const std::vector<uint8_t>* finalizeByBuffer() {
+            if(_buffer.size() > 0)
+            {
+                auto copiedBuffer = new std::vector<uint8_t>();
+                copiedBuffer->resize(_buffer.size());
+                memcpy(copiedBuffer->data(), _buffer.data(), _buffer.size());
+                return copiedBuffer;
+            }
+            return nullptr;
+        }
+
         int32_t write(const void* _data, int32_t _size, bx::Error* _err)
         {
             const char* data = (const char*)_data;
@@ -125,7 +136,7 @@ namespace shaderc
 
 
 
-    const bgfx::Memory* compileShader(ShaderType type, const char* filePath, const char* defines, const char* includeDir, const char* varyingPath, const char* profile)
+    const std::vector<uint8_t>* compileShader(ShaderType type, const char* filePath, const char* defines, const char* includeDir, const char* varyingPath, const char* profile)
     {
         bgfx::Options options;
 
@@ -294,7 +305,7 @@ namespace shaderc
         if ( bgfx::compileShader(attribdef.getData(), commandLineComment.c_str(), data, size, options, &writer) )
         {
             // this will copy the compiled shader data to a memory block and return mem ptr
-            return writer.finalize();
+            return writer.finalizeByBuffer();
         }
 
         return nullptr;
