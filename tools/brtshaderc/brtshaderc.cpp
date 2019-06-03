@@ -48,8 +48,8 @@ void printError(FILE* file, const char* format, ...)
 #include "../../bgfx/tools/shaderc/shaderc.cpp"
 #include "../../bgfx/tools/shaderc/shaderc_hlsl.cpp"
 #include "../../bgfx/tools/shaderc/shaderc_glsl.cpp"
-//#define static_allocate static_allocate_shaderc
-//#define static_deallocate static_deallocate_shaderc
+#define static_allocate static_allocate_shaderc
+#define static_deallocate static_deallocate_shaderc
 #include "../../bgfx/tools/shaderc/shaderc_spirv.cpp"
 #include "../../bgfx/tools/shaderc/shaderc_pssl.cpp"
 
